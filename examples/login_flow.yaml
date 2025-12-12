@@ -1,0 +1,21 @@
+name: Login Flow
+description: Example login automation workflow
+parameters:
+  base_url: https://example.com/login
+  username: user@example.com
+  password: secure_password
+actions:
+  - action: navigate
+    url: ${base_url}
+  - action: fill
+    selector: 'input[name="email"]'
+    value: ${username}
+  - action: fill
+    selector: 'input[name="password"]'
+    value: ${password}
+  - action: click
+    selector: 'button[type="submit"]'
+  - action: wait_timeout
+    timeout: 2000
+  - action: screenshot
+    path: output/after_login.png

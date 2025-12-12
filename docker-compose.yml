@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  scriptforge:
+    build: .
+    image: playwright-scriptforge:latest
+    container_name: scriptforge
+    volumes:
+      - ./scripts:/app/scripts
+      - ./output:/app/output
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: --help

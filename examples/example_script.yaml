@@ -1,0 +1,22 @@
+name: Example Script
+description: Example YAML script demonstrating parameterization
+parameters:
+  url: https://example.com
+  search_query: playwright automation
+  username: testuser
+  password: testpass123
+actions:
+  - action: navigate
+    url: ${url}
+  - action: wait_timeout
+    timeout: 1000
+  - action: fill
+    selector: 'input[name="q"]'
+    value: ${search_query}
+  - action: press
+    selector: 'input[name="q"]'
+    key: Enter
+  - action: wait_timeout
+    timeout: 2000
+  - action: screenshot
+    path: output/search_results.png
