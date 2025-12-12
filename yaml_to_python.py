@@ -112,11 +112,17 @@ class YamlToPythonCompiler:
         return ''
     
     def _escape_string(self, value: str) -> str:
-        """Escape quotes in strings for Python code"""
+        """
+        Escape quotes and special characters in strings for Python code
+        
+        Properly escapes backslashes and quotes to prevent code injection
+        """
         if not isinstance(value, str):
             return str(value)
-        # Escape backslashes first, then quotes
-        return value.replace('\\', '\\\\').replace('"', '\\"')
+        # Escape backslashes first (they need to be doubled)
+        # Then escape double quotes
+        escaped = value.replace('\\', '\\\\').replace('"', '\\"')
+        return escaped
     
     def _resolve_parameter(self, value: str) -> str:
         """

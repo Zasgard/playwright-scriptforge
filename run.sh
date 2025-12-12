@@ -19,7 +19,10 @@ fi
 # Build image if it doesn't exist
 if [[ "$(docker images -q playwright-scriptforge:latest 2> /dev/null)" == "" ]]; then
     echo -e "${BLUE}Building Playwright ScriptForge Docker image...${NC}"
-    docker-compose build
+    if ! docker-compose build; then
+        echo -e "${RED}Error: Failed to build Docker image${NC}"
+        exit 1
+    fi
 fi
 
 # Run command

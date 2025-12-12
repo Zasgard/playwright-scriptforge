@@ -53,8 +53,8 @@ def record(url, output, browser, headless):
     cmd.extend(['--output', output])
     
     try:
-        # Run codegen
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        # Run codegen with explicit shell=False for security
+        result = subprocess.run(cmd, capture_output=True, text=True, shell=False, timeout=300)
         
         if result.returncode == 0:
             click.echo(f"✅ Recording saved to: {output}")
@@ -144,6 +144,8 @@ def compile(yaml_file, output, param):
         
         # Merge parameter overrides
         if param_overrides:
+            if 'parameters' not in yaml_dict:
+                yaml_dict['parameters'] = {}
             yaml_dict['parameters'].update(param_overrides)
             click.echo(f"\nParameter overrides:")
             for key, value in param_overrides.items():
