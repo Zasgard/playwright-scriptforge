@@ -1,0 +1,43 @@
+name: Form Submission
+description: Fill and submit a complex form
+parameters:
+  form_url: https://example.com/form
+  first_name: John
+  last_name: Doe
+  email: john.doe@example.com
+  phone: 555-0123
+  country: United States
+  message: This is a test message
+actions:
+  - action: navigate
+    url: ${form_url}
+  - action: wait
+    selector: 'form'
+  - action: fill
+    selector: 'input[name="firstName"]'
+    value: ${first_name}
+  - action: fill
+    selector: 'input[name="lastName"]'
+    value: ${last_name}
+  - action: fill
+    selector: 'input[name="email"]'
+    value: ${email}
+  - action: fill
+    selector: 'input[name="phone"]'
+    value: ${phone}
+  - action: select
+    selector: 'select[name="country"]'
+    value: ${country}
+  - action: fill
+    selector: 'textarea[name="message"]'
+    value: ${message}
+  - action: check
+    selector: 'input[name="terms"]'
+  - action: screenshot
+    path: output/form_filled.png
+  - action: click
+    selector: 'button[type="submit"]'
+  - action: wait_timeout
+    timeout: 3000
+  - action: screenshot
+    path: output/form_submitted.png

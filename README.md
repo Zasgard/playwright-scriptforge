@@ -1,5 +1,10 @@
 # Playwright ScriptForge
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Playwright](https://img.shields.io/badge/playwright-1.48.0-green.svg)](https://playwright.dev/)
+[![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](https://www.docker.com/)
+
 **Round-trip automation workflow for Playwright** - Record once, edit many times.
 
 Playwright ScriptForge is a Docker-based Python tool that enables a powerful workflow for browser automation:

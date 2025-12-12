@@ -1,0 +1,41 @@
+name: Shopping Cart
+description: Add items to cart and checkout
+parameters:
+  shop_url: https://shop.example.com
+  product_name: Laptop
+  quantity: 1
+  zip_code: 12345
+actions:
+  - action: navigate
+    url: ${shop_url}
+  - action: fill
+    selector: 'input[name="search"]'
+    value: ${product_name}
+  - action: press
+    selector: 'input[name="search"]'
+    key: Enter
+  - action: wait_timeout
+    timeout: 2000
+  - action: click
+    selector: '.product-item:first-child'
+  - action: wait
+    selector: '.add-to-cart'
+  - action: click
+    selector: 'button.add-to-cart'
+  - action: wait_timeout
+    timeout: 1000
+  - action: click
+    selector: 'a.view-cart'
+  - action: wait
+    selector: '.cart-items'
+  - action: screenshot
+    path: output/cart_items.png
+  - action: click
+    selector: 'button.checkout'
+  - action: wait
+    selector: 'input[name="zip"]'
+  - action: fill
+    selector: 'input[name="zip"]'
+    value: ${zip_code}
+  - action: screenshot
+    path: output/checkout_page.png

@@ -1,0 +1,58 @@
+name: Test Playwright ScriptForge
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Install Playwright browsers
+      run: |
+        playwright install --with-deps chromium
+    
+    - name: Run tests
+      run: |
+        python test_scriptforge.py
+    
+    - name: Validate example scripts
+      run: |
+        python scriptforge.py validate examples/example_script.yaml
+        python scriptforge.py validate examples/login_flow.yaml
+    
+    - name: Test CLI commands
+      run: |
+        python scriptforge.py convert examples/example_codegen.py --output /tmp/test.yaml
+        python scriptforge.py compile /tmp/test.yaml --output /tmp/test.py
+        python scriptforge.py --version
+
+  docker-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build Docker image
+      run: |
+        docker-compose build
+    
+    - name: Test Docker CLI
+      run: |
+        docker-compose run scriptforge --help
+        docker-compose run scriptforge validate examples/example_script.yaml

@@ -1,0 +1,24 @@
+name: Multi-page Navigation
+description: Navigate through multiple pages and take screenshots
+parameters:
+  base_url: https://example.com
+  page_count: 5
+actions:
+  - action: navigate
+    url: ${base_url}
+  - action: wait_timeout
+    timeout: 1000
+  - action: screenshot
+    path: output/page_home.png
+  - action: click
+    selector: 'a[href="/about"]'
+  - action: wait_timeout
+    timeout: 1000
+  - action: screenshot
+    path: output/page_about.png
+  - action: click
+    selector: 'a[href="/contact"]'
+  - action: wait_timeout
+    timeout: 1000
+  - action: screenshot
+    path: output/page_contact.png
